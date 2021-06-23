@@ -1,14 +1,19 @@
 import React from "react";
 import Answer from "./Answer";
+import Lexicon from './lexicon.json';
 
 export default class Question extends React.Component {
   constructor() {
     super();
-    this.state = {ans: "word", quiz: "the word is the word", value: "", correct: -1};
-    this.ans = null;
+    this.lexicon = Lexicon;
+    this.keys = Object.keys(this.lexicon);
+    this.length = this.keys.length;
+    let idx = Math.floor( Math.random() * this.length );
+    this.state = {ans: "word", quiz: this.lexicon[this.keys[idx]], value: "", correct: -1};
   }
   reconstruct() {
-    this.setState({ans: "word2", quiz: "the word2 is the word2"});
+    let idx = Math.floor( Math.random() * this.length );
+    this.setState({ans: "word2", quiz: this.lexicon[this.keys[idx]]});
   }
   handleAnswer(e) {
     e.preventDefault()
