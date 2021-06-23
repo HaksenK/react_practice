@@ -1,5 +1,6 @@
 import React from "react";
 import Question from "./Question";
+import Footer from "./Footer";
 
 export default class Layout extends React.Component {
   constructor() {
@@ -8,7 +9,10 @@ export default class Layout extends React.Component {
   }
   render() {
     return (
-      <Question />
+      <div>
+        <Question />
+        <Footer />
+      </div>
     );
   }
 }
