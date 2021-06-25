@@ -9,15 +9,14 @@ export default class Question extends React.Component {
     this.keys = Object.keys(this.lexicon);
     this.length = this.keys.length;
     let idx = Math.floor( Math.random() * this.length );
-    this.state = {ans: "word", quiz: this.lexicon[this.keys[idx]], value: "", correct: -1};
+    this.state = {ans: "word", quiz: this.lexicon[this.keys[idx]], value: "", correct: -1, answerSeen: false};
   }
   reconstruct() {
     let idx = Math.floor( Math.random() * this.length );
     this.setState({ans: "word2", quiz: this.lexicon[this.keys[idx]]});
   }
   handleAnswer(e) {
-    e.preventDefault()
-    console.log(this.state);
+    e.preventDefault();
     if (this.state.value == this.state.ans) {
       this.setState({correct: 1});
     } else {
@@ -28,6 +27,7 @@ export default class Question extends React.Component {
   render() {
     return (
       <div>
+        <p>{this.state.ans}</p>
         <p>{this.state.quiz}</p>
         <input
           onChange={(e) => {
@@ -38,7 +38,8 @@ export default class Question extends React.Component {
           value={this.state.value}
         />
         <button onClick={this.handleAnswer.bind(this)}>GO!</button>
-        <Answer correct={this.state.correct} answer={this.state.ans} />
+        <Answer correct={this.state.correct} answer={this.state.ans} toggleAnswerSeen={() => this.setState({answerSeen: true})}/>
+        <p>{this.state.answerSeen.toString()}</p>
       </div>
     );
   }
