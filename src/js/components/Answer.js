@@ -4,7 +4,6 @@ export default class Answer extends React.Component {
   handleNext (e) {
     e.preventDefault();
     this.props.callNextQuestion();
-    console.log("ok!");
   }
   render () {
     return(

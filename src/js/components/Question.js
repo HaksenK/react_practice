@@ -26,8 +26,7 @@ export default class Question extends React.Component {
   render() {
     return (
       <div>
-        <p>{this.state.ans}</p>
-        <p>{this.state.quiz}</p>
+        <p>Meaning: {this.state.quiz}</p>
         <input
           onChange={(e) => {
             let text = e.target.value;
