@@ -9,11 +9,11 @@ export default class Question extends React.Component {
     this.keys = Object.keys(this.lexicon);
     this.length = this.keys.length;
     let idx = Math.floor( Math.random() * this.length );
-    this.state = {ans: "word", quiz: this.lexicon[this.keys[idx]], value: "", correct: -1, answerSeen: false};
+    this.state = {ans: this.keys[idx], quiz: this.lexicon[this.keys[idx]], value: "", correct: -1};
   }
   reconstruct() {
     let idx = Math.floor( Math.random() * this.length );
-    this.setState({ans: "word2", quiz: this.lexicon[this.keys[idx]]});
+    this.setState({ans: this.keys[idx], quiz: this.lexicon[this.keys[idx]], correct: -1});
   }
   handleAnswer(e) {
     e.preventDefault();
@@ -22,7 +22,6 @@ export default class Question extends React.Component {
     } else {
       this.setState({correct: 0});
     }
-    this.reconstruct();
   }
   render() {
     return (
@@ -37,9 +36,8 @@ export default class Question extends React.Component {
           type="text"
           value={this.state.value}
         />
-        <button onClick={this.handleAnswer.bind(this)}>GO!</button>
-        <Answer correct={this.state.correct} answer={this.state.ans} toggleAnswerSeen={() => this.setState({answerSeen: true})}/>
-        <p>{this.state.answerSeen.toString()}</p>
+        {this.state.correct != 1 && this.state.correct != 0 && <button onClick={this.handleAnswer.bind(this)}>GO!</button> }
+        <Answer correct={this.state.correct} answer={this.state.ans} callNextQuestion={ () => this.reconstruct() }/>
       </div>
     );
   }
